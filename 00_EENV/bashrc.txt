@@ -1,0 +1,48 @@
+# .bashrc
+
+# User specific aliases and functions
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+
+
+#
+# Sfecific configuration
+#
+
+export PS1='\[\e[31;1m\][\u@\h\[\e[33;1m\] \w]\$ \[\e[m\]'
+
+alias c='clear'
+
+#
+# Docker configration
+#
+
+alias icmd='docker inspect -f "{{ .ContainerConfig.Cmd }}"'
+alias crm='docker rm -f $(docker ps -aq) && docker ps -a'
+
+alias irm='docker rmi -f $(docker images -aq) && docker images'
+alias crmi='docker rmi -f $(docker images -aq) && docker images'
+alias vrm='docker volume rm -f $(docker volume ls -q) && docker volume ls'
+alias nrm='docker network rm $(docker network ls -q) && docker network ls'
+
+alias vi='/usr/bin/vim'
+
+alias dlist='echo "process" && echo "" && docker ps -a && echo ""  && echo "network" && echo "" && docker network ls && echo ""  && echo "volumes" && echo "" && docker volume ls'
+
+alias dcnv='crm && nrm && vrm' 
+
+#
+# For docker-compose
+#
+
+alias dockerc='docker compose'
+alias up='docker compose up -d'
+alias down='docker compose down -v'
